@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.siaga.R
+import com.example.siaga.ui.theme.Red10
 import com.example.siaga.ui.theme.Red20
 import com.example.siaga.ui.theme.SIAGATheme
 import java.util.concurrent.locks.Lock
@@ -116,12 +117,12 @@ fun RegisterScreen(navController: NavController) {
                 textAlign = TextAlign.Center
             )
             TextButton(onClick = { navController.navigate("login") }) {
-                Text("Masuk", color = Red20, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text("Masuk", color = Red10, fontWeight = FontWeight.Bold, fontSize = 18.sp)
             }
         }
 
         TextButton(onClick = {}) {
-            Text("Pemadam", color = Red20, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text("Pemadam", color = Red10, fontWeight = FontWeight.Bold, fontSize = 20.sp)
         }
     }
 }
