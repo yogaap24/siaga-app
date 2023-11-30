@@ -43,7 +43,7 @@ fun CustomOutlinedTextField(
 ) {
     Column(modifier = modifier) {
         if (!headerText.isNullOrEmpty()) {
-            Text(text = headerText, fontWeight = FontWeight.Bold)
+            Text(text = headerText, fontWeight = FontWeight.Black)
         }
 
         var passwordVisibility by remember { mutableStateOf(!isPassword) }

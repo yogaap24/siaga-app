@@ -31,7 +31,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.siaga.R
+import com.example.siaga.ui.theme.Red10
 import com.example.siaga.ui.theme.Red20
+import com.example.siaga.ui.theme.poppinsFontFamily
 
 @Composable
 fun LoginScreen(navController: NavController) {
@@ -97,15 +99,15 @@ fun LoginScreen(navController: NavController) {
         ) {
             Text(
                 text = "Belum punya akun?",
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
             TextButton(onClick = { navController.navigate("register") }) {
-                Text("Register", color = Red20, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text("Register", color = Red10, fontWeight = FontWeight.Bold, fontSize = 18.sp)
             }
         }
 
         TextButton(onClick = {}) {
-            Text("Pemadam", color = Red20, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text("Pemadam", color = Red10, fontWeight = FontWeight.Black, fontSize = 20.sp)
         }
     }
 }
