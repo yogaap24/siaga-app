@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import com.example.siaga.R
 import com.example.siaga.ui.theme.Gray30
 import com.example.siaga.ui.theme.Red20
-import com.example.siaga.ui.theme.White10
 import com.example.siaga.ui.theme.White20
 
 @Composable
@@ -37,24 +36,24 @@ fun CustomOutlinedTextField(
     headerText: String? = null,
     leadingIcon: @Composable (() -> Unit)? = null,
     isPassword: Boolean = false,
-    isEnable: Boolean = true,
+    isEditable: Boolean = true,
     validator: (String) -> String? = { null },
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
         if (!headerText.isNullOrEmpty()) {
-            Text(text = headerText, fontWeight = FontWeight.Bold)
+            Text(text = headerText, fontWeight = FontWeight.Black)
         }
 
         var passwordVisibility by remember { mutableStateOf(!isPassword) }
-        var isEnable by remember { mutableStateOf(isEnable) }
         var isFocused by remember { mutableStateOf(false) }
         val errorMessage = remember(value) { if (isFocused) validator(value) else null }
         val isError = errorMessage != null
 
         OutlinedTextField(
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { if (isEditable) onValueChange(it) },
+            enabled = isEditable,
             placeholder = { Text(placeholder) },
             leadingIcon = leadingIcon,
             shape = RoundedCornerShape(30),
@@ -62,26 +61,17 @@ fun CustomOutlinedTextField(
                 { IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
                     Icon(
                         painter = painterResource(if (passwordVisibility) R.drawable.show else R.drawable.hide),
-                        contentDescription = if (passwordVisibility) "Show password" else "Hide password"
+                        contentDescription = if (passwordVisibility) "Tampilkan Kata Sandi" else "Sembunyikan Kata Sandi"
                     )
                 } }
             } else null,
             visualTransformation = if (isPassword && !passwordVisibility) PasswordVisualTransformation() else VisualTransformation.None,
             isError = isError,
-            enabled = isEnable,
-            colors = if (!isEnable) {
-                OutlinedTextFieldDefaults.colors(
-                    disabledBorderColor = White20,
-                    disabledContainerColor = White10,
-                    disabledPlaceholderColor = Gray30,
-                )
-            } else {
-                OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = White20,
-                    focusedBorderColor = White20,
-                    unfocusedPlaceholderColor = Gray30,
-                )
-            },
+            colors = OutlinedTextFieldDefaults.colors(
+                unfocusedBorderColor = White20,
+                focusedBorderColor = White20,
+                unfocusedPlaceholderColor = Gray30,
+            ),
             modifier = Modifier
                 .fillMaxWidth()
                 .height(60.dp)
@@ -94,6 +84,4 @@ fun CustomOutlinedTextField(
         }
     }
 }
-
-
 
