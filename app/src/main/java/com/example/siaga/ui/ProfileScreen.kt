@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.siaga.R
@@ -72,8 +73,8 @@ fun ProfileScreen(navController: NavController) {
         CustomOutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            placeholder = "example@mail.com",
-            headerText = "Nama Pengguna",
+            placeholder = "JohnDoe",
+            headerText = stringResource(R.string.nama_pengguna),
             leadingIcon = { Icon(painterResource(R.drawable.profile),"Profile icon") },
             modifier = Modifier.fillMaxWidth(),
             isEditable = false
@@ -84,8 +85,8 @@ fun ProfileScreen(navController: NavController) {
         CustomOutlinedTextField(
             value = phone,
             onValueChange = { phone = it },
-            placeholder = "example@mail.com",
-            headerText = "Telepon",
+            placeholder = "0800000",
+            headerText = stringResource(R.string.telepon),
             leadingIcon = { Icon(painterResource(R.drawable.call),"Call icon") },
             modifier = Modifier.fillMaxWidth(),
             isEditable = false
@@ -96,8 +97,8 @@ fun ProfileScreen(navController: NavController) {
         CustomOutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            placeholder = "example@mail.com",
-            headerText = "Email",
+            placeholder = stringResource(R.string.contoh_mail_com),
+            headerText = stringResource(R.string.email),
             leadingIcon = { Icon(painterResource(R.drawable.mail),"Email icon") },
             modifier = Modifier.fillMaxWidth(),
             isEditable = false
@@ -108,8 +109,8 @@ fun ProfileScreen(navController: NavController) {
         CustomOutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            placeholder = "Kata Sandi",
-            headerText = "Kata Sandi",
+            placeholder = stringResource(R.string.kata_sandi),
+            headerText = stringResource(R.string.kata_sandi),
             leadingIcon = { Icon(painterResource(R.drawable.lock),"Password Icon") },
             isPassword = true,
             modifier = Modifier.fillMaxWidth(),

@@ -1,3 +1,34 @@
 <resources>
-    <string name="app_name">SIAGA</string>
+    <string name="app_name" translatable="false">SIAGA</string>
+    <string name="pengaturan">Pengaturan</string>
+    <string name="nama_pengguna">Nama Pengguna</string>
+    <string name="telepon">Telepon</string>
+    <string name="kata_sandi">Kata Sandi</string>
+    <string name="email_harus_mengandung">Email harus mengandung @</string>
+    <string name="password_minimal">Password minimal harus 8 karakter</string>
+    <string name="contoh_mail_com">contoh@mail.com</string>
+    <string name="email">Email</string>
+    <string name="konfirmasi_kata_sandi">Konfirmasi Kata Sandi</string>
+    <string name="daftar">Daftar</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="masuk">Masuk</string>
+    <string name="pemadam">Pemadam</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="register">Register</string>
+    <string name="tentang_kami">Tentang kami</string>
+    <string name="hubungi_kami">Hubungi Kami</string>
+    <string name="home">Beranda</string>
+    <string name="add">Tambah</string>
+    <string name="profile">Profil</string>
+    <string name="logout">Keluar</string>
+    <string name="ubah_kata_sandi">Ubah Kata Sandi</string>
+    <string name="bahasa">bahasa</string>
+    <string name="pilih_bahasa">Pilih Bahasa</string>
+    <string name="ubah_password">Ubah Password</string>
+    <string name="kata_sandi_lama">Kata Sandi Lama</string>
+    <string name="kata_sandi_baru">Kata Sandi Baru</string>
+    <string name="ubah_profile">Ubah Profile</string>
+    <string name="simpan">Simpan</string>
+    <string name="kamar_tidur_1">Kamar Tidur 1</string>
+    <string name="nama_perangkat">Nama Perangkat</string>
 </resources>

@@ -23,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -36,6 +37,8 @@ fun RegisterScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    val emailError = stringResource(R.string.email_harus_mengandung)
+    val passwordError = stringResource(R.string.password_minimal)
 
     Column(
         modifier = Modifier
@@ -59,9 +62,9 @@ fun RegisterScreen(navController: NavController) {
         CustomOutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            validator = { if (!it.contains("@")) "Email harus mengandung @" else null },
-            placeholder = "example@mail.com",
-            headerText = "Email",
+            validator = { if (!it.contains("@")) emailError else null },
+            placeholder = stringResource(R.string.contoh_mail_com),
+            headerText = stringResource(R.string.email),
             leadingIcon = { Icon(painterResource(R.drawable.mail),"Email icon") },
             modifier = Modifier.fillMaxWidth()
         )
@@ -71,22 +74,21 @@ fun RegisterScreen(navController: NavController) {
         CustomOutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            validator = { if (it.length < 8) "Password minimal harus 8 karakter" else null },
-            placeholder = "Kata Sandi",
-            headerText = "Kata Sandi",
+            validator = { if (it.length < 8) passwordError else null },
+            placeholder = stringResource(R.string.kata_sandi),
+            headerText = stringResource(R.string.kata_sandi),
             leadingIcon = { Icon(painterResource(R.drawable.lock),"Lock icon") },
             isPassword = true,
             modifier = Modifier.fillMaxWidth()
         )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         CustomOutlinedTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
-            validator = { if (it.length < 8) "Password minimal harus 8 karakter" else null },
-            placeholder = "Konfirmasi Kata Sandi",
-            headerText = "Konfirmasi Kata Sandi",
+            validator = { if (it.length < 8) passwordError else null },
+            placeholder = stringResource(R.string.konfirmasi_kata_sandi),
+            headerText = stringResource(R.string.konfirmasi_kata_sandi),
             leadingIcon = { Icon(painterResource(R.drawable.lock),"Lock icon") },
             isPassword = true,
             modifier = Modifier.fillMaxWidth()
@@ -96,7 +98,7 @@ fun RegisterScreen(navController: NavController) {
 
         CustomButton(
             onClick = {},
-            buttonText = "Daftar",
+            buttonText = stringResource(R.string.daftar),
         )
 
         Spacer(modifier = Modifier.weight(1f))
@@ -107,16 +109,16 @@ fun RegisterScreen(navController: NavController) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Sudah punya akun?",
+                text = stringResource(R.string.sudah_punya_akun),
                 textAlign = TextAlign.Center
             )
             TextButton(onClick = { navController.navigate("login") }) {
-                Text("Masuk", color = Red10, fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Text(stringResource(R.string.masuk), color = Red10, fontWeight = FontWeight.Bold, fontSize = 18.sp)
             }
         }
 
         TextButton(onClick = {}) {
-            Text("Pemadam", color = Red10, fontWeight = FontWeight.Bold, fontSize = 20.sp)
+            Text(stringResource(R.string.pemadam), color = Red10, fontWeight = FontWeight.Bold, fontSize = 20.sp)
         }
     }
 }
