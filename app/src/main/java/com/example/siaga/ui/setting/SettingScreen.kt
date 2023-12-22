@@ -1,5 +1,6 @@
-package com.example.siaga.ui
+package com.example.siaga.ui.setting
 
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,85 +20,101 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.siaga.R
-import com.example.siaga.ui.theme.Red20
 
 data class ListItem(val icon: Int, val title: String, val destination: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingScreen(navController: NavController) {
+    val viewModel: SettingsViewModel = viewModel()
+    val context = LocalContext.current
+
+    val bahasa = stringResource(R.string.bahasa)
+
     val listItems = listOf(
-        ListItem(R.drawable.change_pass, "Ubah Kata Sandi", "change_password"),
-        ListItem(R.drawable.globe, "Bahasa", ""),
-        ListItem(R.drawable.about, "Tentang Kami", "about")
+        ListItem(R.drawable.change_pass, stringResource(R.string.ubah_kata_sandi), "change_password"),
+        ListItem(R.drawable.globe, bahasa, ""),
+        ListItem(R.drawable.about, stringResource(R.string.tentang_kami), "about")
     )
 
+    LaunchedEffect(Unit) {
+        viewModel.loadLanguagePreference(context)
+    }
     val showDialog = remember { mutableStateOf(false) }
-    val selectedLanguage = remember { mutableStateOf("Bahasa Indonesia") }
 
     Column {
         TopAppBar(
-            { Text("Pengaturan") },
+            { Text(stringResource(R.string.pengaturan)) },
             navigationIcon = {
                 IconButton({ navController.navigateUp() }) {
-                    Icon(Icons.Filled.ArrowBack,null)
+                    Icon(Icons.Filled.ArrowBack, null)
                 }
             },
-            colors = TopAppBarDefaults.smallTopAppBarColors(Red20)
+            colors = TopAppBarDefaults.smallTopAppBarColors(Color.Red)
         )
 
         if (showDialog.value) {
             AlertDialog(
                 onDismissRequest = { showDialog.value = false },
-                title = { Text("Pilih Bahasa") },
+                title = { Text(stringResource(R.string.pilih_bahasa)) },
                 text = {
                     Column {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             RadioButton(
-                                selected = selectedLanguage.value == "Bahasa Indonesia",
-                                onClick = {
-                                    selectedLanguage.value = "Bahasa Indonesia"
-                                }
+                                selected = viewModel.selectedLanguage.value == "Indonesia",
+                                onClick = { viewModel.onLanguageSelected("Indonesia") },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Color.Red,
+                                    unselectedColor = Color.Gray
+                                )
                             )
-                            Text("Bahasa Indonesia")
+                            Text("Indonesia")
                         }
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
                             RadioButton(
-                                selected = selectedLanguage.value == "Bahasa Inggris",
-                                onClick = {
-                                    selectedLanguage.value = "Bahasa Inggris"
-                                }
+                                selected = viewModel.selectedLanguage.value == "English",
+                                onClick = { viewModel.onLanguageSelected("English") },
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = Color.Red,
+                                    unselectedColor = Color.Gray
+                                )
                             )
-                            Text("Bahasa Inggris")
+                            Text("English")
                         }
                     }
                 },
                 confirmButton = {
-                    TextButton(onClick = { showDialog.value = false }) {
+                    TextButton(onClick = {
+                        viewModel.saveLanguagePreference(context, viewModel.selectedLanguage.value)
+                        showDialog.value = false
+                    }) {
                         Text("OK")
                     }
                 },
                 dismissButton = {
-                    TextButton(onClick = { showDialog.value = false }) {
+                    TextButton(onClick = {
+                        showDialog.value = false
+                    }) {
                         Text("Cancel")
                     }
                 }
@@ -110,15 +127,13 @@ fun SettingScreen(navController: NavController) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .clickable(onClick = {
-                            if (item.title == "Bahasa") {
+                            if (item.title == bahasa) {
                                 showDialog.value = true
                             } else {
                                 navController.navigate(item.destination)
                             }
                         }),
-                    colors = CardDefaults.cardColors(
-                        containerColor = Color.Transparent,
-                    )
+                    colors = CardDefaults.cardColors(containerColor = Color.Transparent)
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -140,4 +155,3 @@ fun SettingScreen(navController: NavController) {
         }
     }
 }
-

@@ -25,6 +25,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.siaga.R
@@ -37,10 +38,12 @@ fun ChangePassword(navController: NavController) {
     var newpassword by remember { mutableStateOf("") }
     var confpassword by remember { mutableStateOf("") }
 
+    val passwordError = stringResource(R.string.password_minimal)
+
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Ubah Password") },
+                title = { Text(stringResource(R.string.ubah_password)) },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
                         Icon(Icons.Filled.ArrowBack,null)
@@ -63,9 +66,9 @@ fun ChangePassword(navController: NavController) {
                 CustomOutlinedTextField(
                     value = oldpassword,
                     onValueChange = { oldpassword = it },
-                    validator = { if (it.length < 8) "Password minimal harus 8 karakter" else null },
-                    placeholder = "Kata Sandi Lama",
-                    headerText = "Kata Sandi Lama",
+                    validator = { if (it.length < 8) passwordError else null },
+                    placeholder = stringResource(R.string.kata_sandi_lama),
+                    headerText = stringResource(R.string.kata_sandi_lama),
                     leadingIcon = { Icon(painterResource(R.drawable.lock),"Password Icon") },
                     isPassword = true,
                     modifier = Modifier.fillMaxWidth()
@@ -76,9 +79,9 @@ fun ChangePassword(navController: NavController) {
                 CustomOutlinedTextField(
                     value = newpassword,
                     onValueChange = { newpassword = it },
-                    validator = { if (it.length < 8) "Password minimal harus 8 karakter" else null },
-                    placeholder = "Kata Sandi Baru",
-                    headerText = "Kata Sandi Baru",
+                    validator = { if (it.length < 8) passwordError else null },
+                    placeholder = stringResource(R.string.kata_sandi_baru),
+                    headerText = stringResource(R.string.kata_sandi_baru),
                     leadingIcon = { Icon(painterResource(R.drawable.lock),"Password Icon") },
                     isPassword = true,
                     modifier = Modifier.fillMaxWidth()
@@ -89,9 +92,9 @@ fun ChangePassword(navController: NavController) {
                 CustomOutlinedTextField(
                     value = confpassword,
                     onValueChange = { confpassword = it },
-                    validator = { if (it != newpassword) "Konfirmasi password harus sama" else null },
-                    placeholder = "Konfirmasi Kata Sandi",
-                    headerText = "Konfirmasi Kata Sandi",
+                    validator = { if (it.length < 8) passwordError else null },
+                    placeholder = stringResource(R.string.konfirmasi_kata_sandi),
+                    headerText = stringResource(R.string.konfirmasi_kata_sandi),
                     leadingIcon = { Icon(painterResource(R.drawable.lock),"Password Icon") },
                     isPassword = true,
                     modifier = Modifier.fillMaxWidth()
